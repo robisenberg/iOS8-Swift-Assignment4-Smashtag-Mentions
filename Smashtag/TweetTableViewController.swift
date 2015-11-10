@@ -55,6 +55,11 @@ class TweetTableViewController: UITableViewController, UISearchBarDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // auto-sizing of row height
+    tableView.estimatedRowHeight = tableView.rowHeight
+    tableView.rowHeight = UITableViewAutomaticDimension
+    
     refresh()
     
     // Uncomment the following line to preserve selection between presentations
@@ -84,11 +89,8 @@ class TweetTableViewController: UITableViewController, UISearchBarDelegate {
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.ReuseIdentifier, forIndexPath: indexPath)
-    let tweet = tweets[indexPath.section][indexPath.row]
-    cell.textLabel?.text = tweet.text
-    cell.detailTextLabel?.text = tweet.user.name
-    
+    let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.ReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
+    cell.tweet = tweets[indexPath.section][indexPath.row]
     return cell
   }
   
