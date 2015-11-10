@@ -19,7 +19,6 @@
 		8C41E1521BF1214500D1A844 /* TwitterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E14E1BF1214500D1A844 /* TwitterRequest.swift */; };
 		8C41E1531BF1214500D1A844 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E14F1BF1214500D1A844 /* User.swift */; };
 		8CD984191BF23E7800E05D38 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD984181BF23E7800E05D38 /* TweetTableViewCell.swift */; };
-		8CD9841C1BF263E400E05D38 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD9841B1BF263E400E05D38 /* StringExtensions.swift */; };
 		8CD9841E1BF26BE600E05D38 /* TweetStringDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD9841D1BF26BE600E05D38 /* TweetStringDecorator.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +58,6 @@
 		8C41E14E1BF1214500D1A844 /* TwitterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterRequest.swift; sourceTree = "<group>"; };
 		8C41E14F1BF1214500D1A844 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8CD984181BF23E7800E05D38 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
-		8CD9841B1BF263E400E05D38 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		8CD9841D1BF26BE600E05D38 /* TweetStringDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetStringDecorator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +117,6 @@
 				8C41E1131BF1197F00D1A844 /* Assets.xcassets */,
 				8C41E1151BF1197F00D1A844 /* LaunchScreen.storyboard */,
 				8C41E1181BF1197F00D1A844 /* Info.plist */,
-				8CD9841A1BF263C700E05D38 /* Extensions */,
 				8C41E1431BF1210E00D1A844 /* Twitter */,
 			);
 			path = Smashtag;
@@ -152,14 +149,6 @@
 				8C41E14F1BF1214500D1A844 /* User.swift */,
 			);
 			name = Twitter;
-			sourceTree = "<group>";
-		};
-		8CD9841A1BF263C700E05D38 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				8CD9841B1BF263E400E05D38 /* StringExtensions.swift */,
-			);
-			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,7 +283,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CD9841C1BF263E400E05D38 /* StringExtensions.swift in Sources */,
 				8CD9841E1BF26BE600E05D38 /* TweetStringDecorator.swift in Sources */,
 				8C41E13D1BF11F4A00D1A844 /* TweetTableViewController.swift in Sources */,
 				8C41E1521BF1214500D1A844 /* TwitterRequest.swift in Sources */,
