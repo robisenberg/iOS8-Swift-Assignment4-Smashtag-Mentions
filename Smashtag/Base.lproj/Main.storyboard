@@ -14,9 +14,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="hashtag" showsCancelButton="YES" id="IeO-O8-a5V">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            <scopeButtonTitles>
+                                <string>Title</string>
+                                <string>Title</string>
+                            </scopeButtonTitles>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet" textLabel="4Ks-MA-Vl8" detailTextLabel="LvP-TS-rhF" style="IBUITableViewCellStyleSubtitle" id="uBh-KQ-WPv">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uBh-KQ-WPv" id="fwE-cW-DFf">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -50,6 +60,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="rLQ-dm-qfN"/>
+                    <connections>
+                        <outlet property="searchBar" destination="IeO-O8-a5V" id="Fgb-zH-gSH"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhj-pe-2iB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
