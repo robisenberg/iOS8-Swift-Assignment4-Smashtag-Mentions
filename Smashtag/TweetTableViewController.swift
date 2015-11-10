@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetTableViewController: UITableViewController, UISearchBarDelegate {
+class TweetTableViewController: UITableViewController {
   
   var tweets = [[Tweet]]()
   var searchText: String? = "stanford" {
@@ -74,47 +74,6 @@ class TweetTableViewController: UITableViewController, UISearchBarDelegate {
     // Dispose of any resources that can be recreated.
   }
   
-  // MARK: - UITableViewDataSource
-  
-  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return tweets.count
-  }
-  
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tweets[section].count
-  }
-  
-  private struct StoryBoard {
-    static let ReuseIdentifier = "Tweet"
-  }
-  
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.ReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
-    cell.tweet = tweets[indexPath.section][indexPath.row]
-    return cell
-  }
-  
-  // MARK: - UISearchBarDelegate
-  
-  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-
-    if searchBar == self.searchBar {
-      
-      searchBar.resignFirstResponder()
-      
-      if searchBar.text != nil {
-        searchText = searchBar.text!
-      }
-      
-    }
-  }
-  
-  func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-    if searchBar == self.searchBar {
-      searchBar.resignFirstResponder()
-    }
-  }
-  
   /*
   // Override to support conditional editing of the table view.
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -160,4 +119,48 @@ class TweetTableViewController: UITableViewController, UISearchBarDelegate {
   }
   */
   
+  // MARK: - UITableViewDataSource
+  
+  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return tweets.count
+  }
+  
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return tweets[section].count
+  }
+  
+  private struct StoryBoard {
+    static let ReuseIdentifier = "Tweet"
+  }
+  
+  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.ReuseIdentifier, forIndexPath: indexPath) as! TweetTableViewCell
+    cell.tweet = tweets[indexPath.section][indexPath.row]
+    return cell
+  }
+  
+}
+
+// MARK: - UISearchBarDelegate
+
+extension TweetTableViewController: UISearchBarDelegate {
+  
+  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    
+    if searchBar == self.searchBar {
+      
+      searchBar.resignFirstResponder()
+      
+      if searchBar.text != nil {
+        searchText = searchBar.text!
+      }
+      
+    }
+  }
+  
+  func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    if searchBar == self.searchBar {
+      searchBar.resignFirstResponder()
+    }
+  }
 }
