@@ -10,15 +10,6 @@ import UIKit
 
 class TweetTableViewController: UITableViewController {
   
-  var tweets = [[Tweet]]()
-  var searchText: String? = "stanford" {
-    didSet {
-      reset()
-      searchBar?.text = searchText
-      refresh()
-    }
-  }
-  
   // MARK: - Outlets
   
   @IBOutlet weak var searchBar: UISearchBar! {
@@ -28,16 +19,12 @@ class TweetTableViewController: UITableViewController {
     }
   }
   
-  // MARK: - Private
+  // MARK: - Actions
   
-  private func reset() {
-    tweets.removeAll()
-    tableView.reloadData()
-  }
-  
-  private func refresh() {
-    if searchText != nil {
-      let request = TwitterRequest(search: "#\(searchText!)", count: 100)
+  @IBAction func refresh(sender: UIRefreshControl?) {
+    if searchText == nil { sender?.endRefreshing(); return }
+    
+    if let request = nextRequestToAttempt {
       request.fetchTweets { (tweets) -> Void in
         
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -45,10 +32,46 @@ class TweetTableViewController: UITableViewController {
             self.tweets.insert(tweets, atIndex: 0)
             self.tableView?.reloadData()
           }
+          
+          sender?.endRefreshing()
         })
       }
     }
-
+  }
+  
+  // MARK: - Private
+  
+  private struct StoryBoard {
+    static let ReuseIdentifier = "Tweet"
+  }
+  
+  private var tweets = [[Tweet]]()
+  
+  private var searchText: String? = "stanford" {
+    didSet {
+      reset()
+      searchBar?.text = searchText
+      refresh()
+    }
+  }
+  
+  private var lastSuccessfulRequest: TwitterRequest?
+  
+  private var nextRequestToAttempt: TwitterRequest? {
+    if lastSuccessfulRequest != nil { return lastSuccessfulRequest?.requestForNewer }
+    
+    return searchText != nil ? TwitterRequest(search: "#\(searchText!)", count: 100) : nil
+  }
+  
+  private func reset() {
+    lastSuccessfulRequest = nil
+    tweets.removeAll()
+    tableView.reloadData()
+  }
+  
+  private func refresh() {
+    refreshControl?.beginRefreshing()
+    refresh(refreshControl)
   }
   
   // MARK: - UIViewController Lifecycle
@@ -127,10 +150,6 @@ class TweetTableViewController: UITableViewController {
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tweets[section].count
-  }
-  
-  private struct StoryBoard {
-    static let ReuseIdentifier = "Tweet"
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

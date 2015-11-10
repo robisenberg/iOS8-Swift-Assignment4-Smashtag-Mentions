@@ -32,7 +32,7 @@ class TweetTableViewCell: UITableViewCell {
     super.init(coder: aDecoder)
   }
   
-  // MARK: - Private API
+  // MARK: - Private
   
   private func updateUI() {
     resetCell()
