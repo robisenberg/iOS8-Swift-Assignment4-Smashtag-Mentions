@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		8C41E10D1BF1197F00D1A844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E10C1BF1197F00D1A844 /* AppDelegate.swift */; };
-		8C41E10F1BF1197F00D1A844 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E10E1BF1197F00D1A844 /* ViewController.swift */; };
 		8C41E1121BF1197F00D1A844 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C41E1101BF1197F00D1A844 /* Main.storyboard */; };
 		8C41E1141BF1197F00D1A844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C41E1131BF1197F00D1A844 /* Assets.xcassets */; };
 		8C41E1171BF1197F00D1A844 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C41E1151BF1197F00D1A844 /* LaunchScreen.storyboard */; };
 		8C41E1221BF1197F00D1A844 /* SmashtagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E1211BF1197F00D1A844 /* SmashtagTests.swift */; };
 		8C41E12D1BF1197F00D1A844 /* SmashtagUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E12C1BF1197F00D1A844 /* SmashtagUITests.swift */; };
+		8C41E13D1BF11F4A00D1A844 /* TweetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E13C1BF11F4A00D1A844 /* TweetTableViewController.swift */; };
+		8C41E1501BF1214500D1A844 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E14C1BF1214500D1A844 /* MediaItem.swift */; };
+		8C41E1511BF1214500D1A844 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E14D1BF1214500D1A844 /* Tweet.swift */; };
+		8C41E1521BF1214500D1A844 /* TwitterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E14E1BF1214500D1A844 /* TwitterRequest.swift */; };
+		8C41E1531BF1214500D1A844 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E14F1BF1214500D1A844 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +40,6 @@
 /* Begin PBXFileReference section */
 		8C41E1091BF1197F00D1A844 /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C41E10C1BF1197F00D1A844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8C41E10E1BF1197F00D1A844 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8C41E1111BF1197F00D1A844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C41E1131BF1197F00D1A844 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C41E1161BF1197F00D1A844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +50,11 @@
 		8C41E1281BF1197F00D1A844 /* SmashtagUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmashtagUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C41E12C1BF1197F00D1A844 /* SmashtagUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmashtagUITests.swift; sourceTree = "<group>"; };
 		8C41E12E1BF1197F00D1A844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C41E13C1BF11F4A00D1A844 /* TweetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewController.swift; sourceTree = "<group>"; };
+		8C41E14C1BF1214500D1A844 /* MediaItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
+		8C41E14D1BF1214500D1A844 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		8C41E14E1BF1214500D1A844 /* TwitterRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterRequest.swift; sourceTree = "<group>"; };
+		8C41E14F1BF1214500D1A844 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +105,13 @@
 		8C41E10B1BF1197F00D1A844 /* Smashtag */ = {
 			isa = PBXGroup;
 			children = (
+				8C41E13C1BF11F4A00D1A844 /* TweetTableViewController.swift */,
 				8C41E10C1BF1197F00D1A844 /* AppDelegate.swift */,
-				8C41E10E1BF1197F00D1A844 /* ViewController.swift */,
 				8C41E1101BF1197F00D1A844 /* Main.storyboard */,
 				8C41E1131BF1197F00D1A844 /* Assets.xcassets */,
 				8C41E1151BF1197F00D1A844 /* LaunchScreen.storyboard */,
 				8C41E1181BF1197F00D1A844 /* Info.plist */,
+				8C41E1431BF1210E00D1A844 /* Twitter */,
 			);
 			path = Smashtag;
 			sourceTree = "<group>";
@@ -123,6 +132,17 @@
 				8C41E12E1BF1197F00D1A844 /* Info.plist */,
 			);
 			path = SmashtagUITests;
+			sourceTree = "<group>";
+		};
+		8C41E1431BF1210E00D1A844 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				8C41E14C1BF1214500D1A844 /* MediaItem.swift */,
+				8C41E14D1BF1214500D1A844 /* Tweet.swift */,
+				8C41E14E1BF1214500D1A844 /* TwitterRequest.swift */,
+				8C41E14F1BF1214500D1A844 /* User.swift */,
+			);
+			name = Twitter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,8 +276,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C41E10F1BF1197F00D1A844 /* ViewController.swift in Sources */,
+				8C41E13D1BF11F4A00D1A844 /* TweetTableViewController.swift in Sources */,
+				8C41E1521BF1214500D1A844 /* TwitterRequest.swift in Sources */,
+				8C41E1531BF1214500D1A844 /* User.swift in Sources */,
 				8C41E10D1BF1197F00D1A844 /* AppDelegate.swift in Sources */,
+				8C41E1501BF1214500D1A844 /* MediaItem.swift in Sources */,
+				8C41E1511BF1214500D1A844 /* Tweet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
