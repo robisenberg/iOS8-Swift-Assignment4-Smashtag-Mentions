@@ -35,29 +35,32 @@ class TweetTableViewCell: UITableViewCell {
   // MARK: - Private API
   
   private func updateUI() {
+    resetCell()
+    
+    if let tweet = self.tweet {
+      bodyTextLabel?.attributedText = TweetStringDecorator(tweet: tweet).attributedString()
+      headingTextLabel?.text = "\(tweet.user)" // tweet.user.description
+      displayProfileImage()
+    }
+  }
+  
+  private func resetCell() {
     profilePictureImageView?.image = nil
     headingTextLabel?.attributedText = nil
     bodyTextLabel?.text = nil
-    
-    if let tweet = self.tweet {
-      bodyTextLabel?.text = tweet.text
-      if bodyTextLabel?.text != nil {
-        for _ in tweet.media {
-          bodyTextLabel.text! += " 📷"
-        }
-      }
-      
-      headingTextLabel?.text = "\(tweet.user)" // tweet.user.description
+  }
   
+  // currently blocks main thread!
+  // try using something like NSUrlSessionDataTask
+  private func displayProfileImage() {
+    if let tweet = self.tweet {
+      
       if let profileImageURL = tweet.user.profileImageURL {
         
-        // blocks main thread!
-        // try using something like NSUrlSessionDataTask
         if let imageData = NSData(contentsOfURL: profileImageURL) {
           profilePictureImageView?.image = UIImage(data: imageData)
         }
       }
- 
     }
   }
 }
