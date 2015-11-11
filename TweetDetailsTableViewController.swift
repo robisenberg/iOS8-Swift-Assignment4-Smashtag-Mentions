@@ -9,8 +9,67 @@
 import UIKit
 
 class TweetDetailsTableViewController: UITableViewController {
+
+  // MARK: - Public Model
   
-  var tweet: Tweet?
+  var tweet: Tweet? {
+    didSet {
+      if let tweet = self.tweet {
+        if let itemList = TweetItemList(name: "Hashtags", type: TweetItem.Hashtag, items: tweet.hashtags) {
+          tweetItemLists.append(itemList)
+        }
+        
+        if let itemList = TweetItemList(name: "URLs", type: TweetItem.URL, items: tweet.urls) {
+          tweetItemLists.append(itemList)
+        }
+        
+        if let itemList = TweetItemList(name: "Mentions", type: TweetItem.Mention, items: tweet.userMentions) {
+          tweetItemLists.append(itemList)
+        }
+        
+        if let itemList = TweetItemList(name: "Images", type: TweetItem.Image, items: tweet.media) {
+          tweetItemLists.append(itemList)
+        }
+      }
+    }
+  }
+  
+  // MARK: - Private Model
+  
+  private var tweetItemLists =  [TweetItemList]()
+  
+  private enum TweetItem {
+    case Mention(String)
+    case Hashtag(String)
+    case URL(String)
+    case Image(NSURL?)
+  }
+  
+  private struct TweetItemList {
+    var tweetItems = [TweetItem]()
+    var name: String
+    var count: Int { return tweetItems.count }
+    
+    init?(name: String, type: String -> TweetItem, items: [Tweet.IndexedKeyword]) {
+      if items.count <= 0 { return nil }
+      self.name = name
+      for item in items { add(type(item.keyword)) }
+    }
+    
+    init?(name: String, type: NSURL -> TweetItem, items: [MediaItem]) {
+      if items.count <= 0 { return nil }
+      self.name = name
+      for item in items { add(type(item.url!)) }
+    }
+    
+    mutating func add(tweetItem: TweetItem) {
+      tweetItems.append(tweetItem)
+    }
+    
+    subscript(i: Int) -> TweetItem {
+      return tweetItems[i]
+    }
+  }
   
   // MARK: - View Controller Lifecycle
   
@@ -32,56 +91,33 @@ class TweetDetailsTableViewController: UITableViewController {
   // MARK: - UITableViewDataSource
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return 3
+    return tweetItemLists.count
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    var result = 0
-    switch(section) {
-    case 0:
-      result = tweet?.userMentions.count ?? 0
-    case 1:
-      result = tweet?.hashtags.count ?? 0
-    case 2:
-      result = tweet?.urls.count ?? 0
-    default:
-      break
-    }
-
-    return result
+    return tweetItemLists[section].count
   }
   
   override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    switch(section) {
-    case 0:
-      return "User Mentions"
-    case 1:
-      return "Hashtags"
-    case 2:
-      return "URLs"
-    default:
-      return nil
-    }
+    return tweetItemLists[section].name
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetItem", forIndexPath: indexPath)
 
-    switch(indexPath.section) {
-    case 0:
-        if let items = tweet?.userMentions {
-          cell.textLabel?.text = items[indexPath.row].keyword
+    let tweetItem = tweetItemLists[indexPath.section][indexPath.row]
+    switch(tweetItem) {
+      case .Mention(let value):
+        cell.textLabel?.text = value
+      case .URL(let value):
+        cell.textLabel?.text = value
+      case .Hashtag(let value):
+        cell.textLabel?.text = value
+      case .Image(let url):
+        if let url = url {
+          cell.imageView?.image = UIImage(data: NSData(contentsOfURL: url)!)
+          cell.textLabel?.text = ""
         }
-      case 1:
-        if let items = tweet?.hashtags {
-          cell.textLabel?.text = items[indexPath.row].keyword
-        }
-      case 2:
-        if let items = tweet?.urls {
-          cell.textLabel?.text = items[indexPath.row].keyword
-        }
-      default:
-        break
     }
 
     return cell
