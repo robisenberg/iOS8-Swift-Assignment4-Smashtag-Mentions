@@ -15,21 +15,10 @@ class TweetDetailsTableViewController: UITableViewController {
   var tweet: Tweet? {
     didSet {
       if let tweet = self.tweet {
-        if let itemList = TweetItemList(name: "Hashtags", type: TweetItem.Hashtag, items: tweet.hashtags) {
-          tweetItemLists.append(itemList)
-        }
-        
-        if let itemList = TweetItemList(name: "URLs", type: TweetItem.URL, items: tweet.urls) {
-          tweetItemLists.append(itemList)
-        }
-        
-        if let itemList = TweetItemList(name: "Mentions", type: TweetItem.Mention, items: tweet.userMentions) {
-          tweetItemLists.append(itemList)
-        }
-        
-        if let itemList = TweetItemList(name: "Images", type: TweetItem.Image, items: tweet.media) {
-          tweetItemLists.append(itemList)
-        }
+        add(TweetItemList(name: "Hashtags", items: tweet.hashtags))
+        add(TweetItemList(name: "URLs", items: tweet.urls))
+        add(TweetItemList(name: "Mentions", items: tweet.userMentions))
+        add(TweetItemList(name: "Images", items: tweet.media))
       }
     }
   }
@@ -38,10 +27,13 @@ class TweetDetailsTableViewController: UITableViewController {
   
   private var tweetItemLists =  [TweetItemList]()
   
+  // convenient helper method for adding TweetItemList only if is not nil
+  private func add(tweetItemList: TweetItemList?) {
+    if let itemList = tweetItemList { tweetItemLists.append(itemList) }
+  }
+  
   private enum TweetItem {
-    case Mention(String)
-    case Hashtag(String)
-    case URL(String)
+    case Text(String)
     case Image(NSURL?)
   }
   
@@ -50,16 +42,16 @@ class TweetDetailsTableViewController: UITableViewController {
     var name: String
     var count: Int { return tweetItems.count }
     
-    init?(name: String, type: String -> TweetItem, items: [Tweet.IndexedKeyword]) {
+    init?(name: String, items: [Tweet.IndexedKeyword]) {
       if items.count <= 0 { return nil }
       self.name = name
-      for item in items { add(type(item.keyword)) }
+      for item in items { add(TweetItem.Text(item.keyword)) }
     }
     
-    init?(name: String, type: NSURL -> TweetItem, items: [MediaItem]) {
+    init?(name: String, items: [MediaItem]) {
       if items.count <= 0 { return nil }
       self.name = name
-      for item in items { add(type(item.url!)) }
+      for item in items { add(TweetItem.Image(item.url)) }
     }
     
     mutating func add(tweetItem: TweetItem) {
@@ -107,11 +99,7 @@ class TweetDetailsTableViewController: UITableViewController {
 
     let tweetItem = tweetItemLists[indexPath.section][indexPath.row]
     switch(tweetItem) {
-      case .Mention(let value):
-        cell.textLabel?.text = value
-      case .URL(let value):
-        cell.textLabel?.text = value
-      case .Hashtag(let value):
+      case .Text(let value):
         cell.textLabel?.text = value
       case .Image(let url):
         if let url = url {
