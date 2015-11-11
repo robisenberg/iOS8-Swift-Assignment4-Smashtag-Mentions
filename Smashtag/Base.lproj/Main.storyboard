@@ -95,6 +95,7 @@
                                     <outlet property="bodyTextLabel" destination="gG0-2x-M7h" id="wy1-MB-7yM"/>
                                     <outlet property="headingTextLabel" destination="cOZ-Tj-pKL" id="Sol-Qz-fyr"/>
                                     <outlet property="profilePictureImageView" destination="LY4-GP-xec" id="38y-Fl-lTE"/>
+                                    <segue destination="4th-ph-jPg" kind="show" identifier="TweetDetails" id="hBn-NW-uec"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -118,6 +119,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhj-pe-2iB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1466" y="228"/>
+        </scene>
+        <!--Tweet Details Table View Controller-->
+        <scene sceneID="yc3-jw-pSP">
+            <objects>
+                <tableViewController id="4th-ph-jPg" customClass="TweetDetailsTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wzJ-b2-31R">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetItem" textLabel="rBe-2L-krT" style="IBUITableViewCellStyleDefault" id="aX4-a4-dN2">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aX4-a4-dN2" id="4sl-oU-GQ2">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rBe-2L-krT">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="4th-ph-jPg" id="Ddp-zu-pDw"/>
+                            <outlet property="delegate" destination="4th-ph-jPg" id="7uY-un-7jh"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ard-ac-fXg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2245" y="228"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PtT-ua-sMi">
