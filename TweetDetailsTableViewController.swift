@@ -15,10 +15,10 @@ class TweetDetailsTableViewController: UITableViewController {
   var tweet: Tweet? {
     didSet {
       if let tweet = self.tweet {
+        add(TweetItemList(name: "Images", items: tweet.media))
         add(TweetItemList(name: "Hashtags", items: tweet.hashtags))
         add(TweetItemList(name: "URLs", items: tweet.urls))
         add(TweetItemList(name: "Mentions", items: tweet.userMentions))
-        add(TweetItemList(name: "Images", items: tweet.media))
       }
     }
   }
@@ -34,7 +34,7 @@ class TweetDetailsTableViewController: UITableViewController {
   
   private enum TweetItem {
     case Text(String)
-    case Image(NSURL?)
+    case Image(url: NSURL?, aspectRatio: Double)
   }
   
   private struct TweetItemList {
@@ -51,7 +51,7 @@ class TweetDetailsTableViewController: UITableViewController {
     init?(name: String, items: [MediaItem]) {
       if items.count <= 0 { return nil }
       self.name = name
-      for item in items { add(TweetItem.Image(item.url)) }
+      for item in items { add(TweetItem.Image(url: item.url, aspectRatio: item.aspectRatio)) }
     }
     
     mutating func add(tweetItem: TweetItem) {
@@ -67,6 +67,10 @@ class TweetDetailsTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    // auto-sizing of row height
+//    tableView.estimatedRowHeight = tableView.rowHeight
+//    tableView.rowHeight = UITableViewAutomaticDimension
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
@@ -94,21 +98,30 @@ class TweetDetailsTableViewController: UITableViewController {
     return tweetItemLists[section].name
   }
   
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("TweetItem", forIndexPath: indexPath)
-
+  override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     let tweetItem = tweetItemLists[indexPath.section][indexPath.row]
+    
+    switch(tweetItem) {
+    case .Text:
+      return UITableViewAutomaticDimension
+    case .Image(_, let aspectRatio):
+       return (tableView.frame.size.width) / CGFloat(aspectRatio)
+    }
+  }
+  
+  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let tweetItem = tweetItemLists[indexPath.section][indexPath.row]
+
     switch(tweetItem) {
       case .Text(let value):
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetItem", forIndexPath: indexPath)
         cell.textLabel?.text = value
-      case .Image(let url):
-        if let url = url {
-          cell.imageView?.image = UIImage(data: NSData(contentsOfURL: url)!)
-          cell.textLabel?.text = ""
-        }
+        return cell
+      case .Image(let url, _):
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetImageItem", forIndexPath: indexPath) as! ImageTableViewCell
+        cell.imageURL = url
+        return cell
     }
-
-    return cell
   }
   
   /*

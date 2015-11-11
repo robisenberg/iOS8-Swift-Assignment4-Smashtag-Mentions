@@ -21,6 +21,7 @@
 		8CD984191BF23E7800E05D38 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD984181BF23E7800E05D38 /* TweetTableViewCell.swift */; };
 		8CD9841E1BF26BE600E05D38 /* TweetStringDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD9841D1BF26BE600E05D38 /* TweetStringDecorator.swift */; };
 		8CD984261BF36B1000E05D38 /* TweetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD984251BF36B1000E05D38 /* TweetDetailsTableViewController.swift */; };
+		8CD9842A1BF3AFFF00E05D38 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD984291BF3AFFF00E05D38 /* ImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		8CD984181BF23E7800E05D38 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		8CD9841D1BF26BE600E05D38 /* TweetStringDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetStringDecorator.swift; sourceTree = "<group>"; };
 		8CD984251BF36B1000E05D38 /* TweetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TweetDetailsTableViewController.swift; path = ../TweetDetailsTableViewController.swift; sourceTree = "<group>"; };
+		8CD984291BF3AFFF00E05D38 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				8CD984181BF23E7800E05D38 /* TweetTableViewCell.swift */,
+				8CD984291BF3AFFF00E05D38 /* ImageTableViewCell.swift */,
 			);
 			name = UIViews;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				8C41E10D1BF1197F00D1A844 /* AppDelegate.swift in Sources */,
 				8C41E1501BF1214500D1A844 /* MediaItem.swift in Sources */,
 				8C41E1511BF1214500D1A844 /* Tweet.swift in Sources */,
+				8CD9842A1BF3AFFF00E05D38 /* ImageTableViewCell.swift in Sources */,
 				8CD984191BF23E7800E05D38 /* TweetTableViewCell.swift in Sources */,
 				8CD984261BF36B1000E05D38 /* TweetDetailsTableViewController.swift in Sources */,
 			);

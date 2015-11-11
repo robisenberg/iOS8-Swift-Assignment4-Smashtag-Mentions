@@ -150,6 +150,31 @@
                                 </tableViewCellContentView>
                                 <animations/>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetImageItem" rowHeight="409" id="nyS-Vq-xDj" customClass="ImageTableViewCell" customModule="Smashtag" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="136" width="600" height="409"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nyS-Vq-xDj" id="6bs-I1-gya">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="408"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="t8r-uS-Mxx">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="408"/>
+                                            <animations/>
+                                        </imageView>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="t8r-uS-Mxx" secondAttribute="bottom" constant="1" id="Co4-gM-fDN"/>
+                                    <constraint firstItem="t8r-uS-Mxx" firstAttribute="leading" secondItem="nyS-Vq-xDj" secondAttribute="leading" id="Jlz-bE-reB"/>
+                                    <constraint firstAttribute="trailing" secondItem="t8r-uS-Mxx" secondAttribute="trailing" id="YFU-OH-ddj"/>
+                                    <constraint firstItem="t8r-uS-Mxx" firstAttribute="top" secondItem="nyS-Vq-xDj" secondAttribute="top" id="dF9-HI-gT2"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="mainImageView" destination="t8r-uS-Mxx" id="vrJ-ZS-rYl"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="4th-ph-jPg" id="Ddp-zu-pDw"/>
