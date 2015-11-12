@@ -17,7 +17,7 @@ class TweetDetailsTableViewController: UITableViewController {
       if let tweet = self.tweet {
         add(TweetItemList(name: "Images", items: tweet.media))
         add(TweetItemList(name: "Hashtags", items: tweet.hashtags))
-        add(TweetItemList(name: "URLs", items: tweet.urls))
+        add(TweetItemList(name: "URLs", items: tweet.urls, type: TweetItem.URL))
         add(TweetItemList(name: "Mentions", items: tweet.userMentions))
       }
     }
@@ -34,6 +34,7 @@ class TweetDetailsTableViewController: UITableViewController {
   
   private enum TweetItem {
     case Text(String)
+    case URL(String)
     case Image(url: NSURL?, aspectRatio: Double)
   }
   
@@ -42,10 +43,10 @@ class TweetDetailsTableViewController: UITableViewController {
     var name: String
     var count: Int { return tweetItems.count }
     
-    init?(name: String, items: [Tweet.IndexedKeyword]) {
+    init?(name: String, items: [Tweet.IndexedKeyword], type tweetItemConstructor: String -> TweetItem = TweetItem.Text) {
       if items.count <= 0 { return nil }
       self.name = name
-      for item in items { add(TweetItem.Text(item.keyword)) }
+      for item in items { add(tweetItemConstructor(item.keyword)) }
     }
     
     init?(name: String, items: [MediaItem]) {
@@ -102,7 +103,7 @@ class TweetDetailsTableViewController: UITableViewController {
     let tweetItem = tweetItemLists[indexPath.section][indexPath.row]
     
     switch(tweetItem) {
-    case .Text:
+    case .Text, .URL:
       return UITableViewAutomaticDimension
     case .Image(_, let aspectRatio):
        return (tableView.frame.size.width) / CGFloat(aspectRatio)
@@ -114,7 +115,11 @@ class TweetDetailsTableViewController: UITableViewController {
 
     switch(tweetItem) {
       case .Text(let value):
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetItem", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetTextItem", forIndexPath: indexPath)
+        cell.textLabel?.text = value
+        return cell
+      case .URL(let value):
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetURLItem", forIndexPath: indexPath)
         cell.textLabel?.text = value
         return cell
       case .Image(let url, _):
@@ -159,14 +164,16 @@ class TweetDetailsTableViewController: UITableViewController {
   }
   */
   
-  /*
   // MARK: - Navigation
   
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
+    if segue.identifier == "TweetSearch" {
+      if let destination = segue.destinationViewController as? TweetTableViewController {
+        if let tableViewCell = sender as? UITableViewCell {
+          destination.searchText = tableViewCell.textLabel?.text
+        }
+      }
+    }
   }
-  */
   
 }

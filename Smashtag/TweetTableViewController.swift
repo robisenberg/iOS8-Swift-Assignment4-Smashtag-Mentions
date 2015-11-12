@@ -10,6 +10,16 @@ import UIKit
 
 class TweetTableViewController: UITableViewController {
   
+  // MARK: - Public API
+  
+  var searchText: String? = "#stanford" {
+    didSet {
+      reset()
+      searchBar?.text = searchText
+      refresh()
+    }
+  }
+  
   // MARK: - Outlets
   
   @IBOutlet weak var searchBar: UISearchBar! {
@@ -47,20 +57,12 @@ class TweetTableViewController: UITableViewController {
   
   private var tweets = [[Tweet]]()
   
-  private var searchText: String? = "stanford" {
-    didSet {
-      reset()
-      searchBar?.text = searchText
-      refresh()
-    }
-  }
-  
   private var lastSuccessfulRequest: TwitterRequest?
   
   private var nextRequestToAttempt: TwitterRequest? {
     if lastSuccessfulRequest != nil { return lastSuccessfulRequest?.requestForNewer }
     
-    return searchText != nil ? TwitterRequest(search: "#\(searchText!)", count: 100) : nil
+    return searchText != nil ? TwitterRequest(search: searchText!, count: 100) : nil
   }
   
   private func reset() {
@@ -142,9 +144,6 @@ class TweetTableViewController: UITableViewController {
         }
       }
     }
-    
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
   }
   
   // MARK: - UITableViewDataSource
