@@ -51,22 +51,12 @@ class TweetTableViewCell: UITableViewCell {
   }
   
   private func displayProfileImage() {
-    if let tweet = self.tweet {
-      
-      if let profileImageURL = tweet.user.profileImageURL {
-        
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-          
-          if let imageData = NSData(contentsOfURL: profileImageURL) {
-            
-            dispatch_async(dispatch_get_main_queue()) {
-              if self.tweet?.user.profileImageURL == profileImageURL {
-                self.profilePictureImageView?.image = UIImage(data: imageData)
-              }
-            }
-          }
-        }
-      }
+    guard let tweet = self.tweet else { return }
+    guard let profileImageURL = tweet.user.profileImageURL else { return }
+    
+    ImageDownloader.fetchThenHandleOnMainQueue(profileImageURL) { (imageData) -> Void in
+      guard self.tweet?.user.profileImageURL == profileImageURL else { return }
+      self.profilePictureImageView?.image = UIImage(data: imageData)
     }
   }
 }

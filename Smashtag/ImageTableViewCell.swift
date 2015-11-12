@@ -14,7 +14,7 @@ class ImageTableViewCell: UITableViewCell {
   
   var imageURL: NSURL? {
     didSet {
-      fetchImage()
+      updateUI()
     }
   }
   
@@ -22,18 +22,12 @@ class ImageTableViewCell: UITableViewCell {
   
   // MARK: - Private API
   
-  private func fetchImage() {
-    if let url = imageURL {
-      dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-        
-        let imageData = NSData(contentsOfURL: url)!
-        
-        dispatch_async(dispatch_get_main_queue()) {
-          if self.imageURL == url {
-            self.mainImageView?.image = UIImage(data: imageData)
-          }
-        }
-      }
+  private func updateUI() {
+    guard let url = imageURL else { return }
+
+    ImageDownloader.fetchThenHandleOnMainQueue(url) { (imageData) -> Void in
+      guard self.imageURL == url else { return }
+      self.mainImageView?.image = UIImage(data: imageData)
     }
   }
   

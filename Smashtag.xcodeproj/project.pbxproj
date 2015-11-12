@@ -92,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C38DB171BF4F4FD00A389A6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8CD9841D1BF26BE600E05D38 /* TweetStringDecorator.swift */,
+				8C38DB141BF4EE8200A389A6 /* ImageDownloader.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		8C41E1001BF1197F00D1A844 = {
 			isa = PBXGroup;
 			children = (
@@ -117,8 +126,7 @@
 			children = (
 				8CD984221BF36A2100E05D38 /* UIViews */,
 				8CD984211BF36A1600E05D38 /* Controllers */,
-				8CD9841D1BF26BE600E05D38 /* TweetStringDecorator.swift */,
-				8C38DB141BF4EE8200A389A6 /* ImageDownloader.swift */,
+				8C38DB171BF4F4FD00A389A6 /* Helpers */,
 				8C41E10C1BF1197F00D1A844 /* AppDelegate.swift */,
 				8C41E1101BF1197F00D1A844 /* Main.storyboard */,
 				8C41E1131BF1197F00D1A844 /* Assets.xcassets */,
