@@ -32,20 +32,18 @@ class TweetSearchViewController: UITableViewController {
   // MARK: - Actions
   
   @IBAction func refresh(sender: UIRefreshControl?) {
-    if searchText == nil { sender?.endRefreshing(); return }
-    
-    if let request = nextRequestToAttempt {
-      request.fetchTweets { (tweets) -> Void in
+    guard searchText != nil else { sender?.endRefreshing(); return }
+    guard let request = nextRequestToAttempt else { return }
+
+    request.fetchTweets { (tweets) -> Void in
+      dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        if tweets.count > 0 {
+          self.tweets.insert(tweets, atIndex: 0)
+          self.tableView?.reloadData()
+        }
         
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-          if tweets.count > 0 {
-            self.tweets.insert(tweets, atIndex: 0)
-            self.tableView?.reloadData()
-          }
-          
-          sender?.endRefreshing()
-        })
-      }
+        sender?.endRefreshing()
+      })
     }
   }
   
@@ -70,7 +68,7 @@ class TweetSearchViewController: UITableViewController {
   private var nextRequestToAttempt: TwitterRequest? {
     if lastSuccessfulRequest != nil { return lastSuccessfulRequest?.requestForNewer }
     
-    return searchText != nil ? TwitterRequest(search: searchText!, count: Defaults.TweetSearchCount) : nil
+    return searchText == nil ? nil : TwitterRequest(search: searchText!, count: Defaults.TweetSearchCount)
   }
   
   private func reset() {
@@ -146,11 +144,10 @@ class TweetSearchViewController: UITableViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == StoryBoard.Segue.Details {
-      if let destination = segue.destinationViewController as? TweetDetailsTableViewController {
-        if let tweet = (sender as? TweetTableViewCell)?.tweet {
-          destination.tweet = tweet
-        }
-      }
+      guard let destination = segue.destinationViewController as? TweetDetailsTableViewController else { return }
+      guard let tweet = (sender as? TweetTableViewCell)?.tweet else { return }
+
+      destination.tweet = tweet
     }
   }
   
@@ -177,21 +174,17 @@ class TweetSearchViewController: UITableViewController {
 extension TweetSearchViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-    
-    if searchBar == self.searchBar {
+    guard searchBar == self.searchBar else { return }
       
-      searchBar.resignFirstResponder()
+    searchBar.resignFirstResponder()
       
-      if searchBar.text != nil {
-        searchText = searchBar.text!
-      }
-      
+    if searchBar.text != nil {
+      searchText = searchBar.text!
     }
   }
   
   func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-    if searchBar == self.searchBar {
-      searchBar.resignFirstResponder()
-    }
+    guard searchBar == self.searchBar else { return }
+    searchBar.resignFirstResponder()
   }
 }

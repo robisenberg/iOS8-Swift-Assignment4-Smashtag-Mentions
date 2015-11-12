@@ -44,13 +44,13 @@ class TweetDetailsTableViewController: UITableViewController {
     var count: Int { return tweetItems.count }
     
     init?(name: String, items: [Tweet.IndexedKeyword], type tweetItemConstructor: String -> TweetItem = TweetItem.Text) {
-      if items.count <= 0 { return nil }
+      guard items.count > 0 else { return nil }
       self.name = name
       for item in items { add(tweetItemConstructor(item.keyword)) }
     }
     
     init?(name: String, items: [MediaItem]) {
-      if items.count <= 0 { return nil }
+      guard items.count > 0 else { return nil }
       self.name = name
       for item in items { add(TweetItem.Image(url: item.url, aspectRatio: item.aspectRatio)) }
     }
@@ -190,11 +190,10 @@ class TweetDetailsTableViewController: UITableViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == StoryBoard.Segue.TweetSearch {
-      if let destination = segue.destinationViewController as? TweetSearchViewController {
-        if let tableViewCell = sender as? UITableViewCell {
-          destination.searchText = tableViewCell.textLabel?.text
-        }
-      }
+      guard let destination = segue.destinationViewController as? TweetSearchViewController else { return }
+      guard let tableViewCell = sender as? UITableViewCell else { return }
+
+      destination.searchText = tableViewCell.textLabel?.text
     }
   }
   

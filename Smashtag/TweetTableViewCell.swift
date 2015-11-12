@@ -36,12 +36,11 @@ class TweetTableViewCell: UITableViewCell {
   
   private func updateUI() {
     resetCell()
-    
-    if let tweet = self.tweet {
-      bodyTextLabel?.attributedText = TweetStringDecorator(tweet: tweet).attributedString()
-      headingTextLabel?.text = "\(tweet.user)" // tweet.user.description
-      displayProfileImage()
-    }
+    guard let tweet = self.tweet else { return }
+
+    bodyTextLabel?.attributedText = TweetStringDecorator(tweet: tweet).attributedString()
+    headingTextLabel?.text = "\(tweet.user)" // tweet.user.description
+    displayProfileImage()
   }
   
   private func resetCell() {
