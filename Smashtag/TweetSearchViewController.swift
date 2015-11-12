@@ -12,7 +12,7 @@ class TweetSearchViewController: UITableViewController {
   
   // MARK: - Public API
   
-  var searchText: String? = "#stanford" {
+  var searchText: String? = Defaults.InitialSearchQuery {
     didSet {
       reset()
       searchBar?.text = searchText
@@ -51,8 +51,16 @@ class TweetSearchViewController: UITableViewController {
   
   // MARK: - Private
   
+  private struct Defaults {
+    static let TweetSearchCount = 100
+    static let InitialSearchQuery = "#stanford"
+  }
+  
   private struct StoryBoard {
     static let ReuseIdentifier = "Tweet"
+    struct Segue {
+      static let Details = "TweetDetails"
+    }
   }
   
   private var tweets = [[Tweet]]()
@@ -62,7 +70,7 @@ class TweetSearchViewController: UITableViewController {
   private var nextRequestToAttempt: TwitterRequest? {
     if lastSuccessfulRequest != nil { return lastSuccessfulRequest?.requestForNewer }
     
-    return searchText != nil ? TwitterRequest(search: searchText!, count: 100) : nil
+    return searchText != nil ? TwitterRequest(search: searchText!, count: Defaults.TweetSearchCount) : nil
   }
   
   private func reset() {
@@ -137,7 +145,7 @@ class TweetSearchViewController: UITableViewController {
   // MARK: - Navigation
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "TweetDetails" {
+    if segue.identifier == StoryBoard.Segue.Details {
       if let destination = segue.destinationViewController as? TweetDetailsTableViewController {
         if let tweet = (sender as? TweetTableViewCell)?.tweet {
           destination.tweet = tweet

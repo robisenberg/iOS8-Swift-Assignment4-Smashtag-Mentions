@@ -15,10 +15,10 @@ class TweetDetailsTableViewController: UITableViewController {
   var tweet: Tweet? {
     didSet {
       if let tweet = self.tweet {
-        add(TweetItemList(name: "Images", items: tweet.media))
-        add(TweetItemList(name: "Hashtags", items: tweet.hashtags))
-        add(TweetItemList(name: "URLs", items: tweet.urls, type: TweetItem.URL))
-        add(TweetItemList(name: "Mentions", items: tweet.userMentions))
+        add(TweetItemList(name: Defaults.SectionName.Images, items: tweet.media))
+        add(TweetItemList(name: Defaults.SectionName.Hashtags, items: tweet.hashtags))
+        add(TweetItemList(name: Defaults.SectionName.URLs, items: tweet.urls, type: TweetItem.URL))
+        add(TweetItemList(name: Defaults.SectionName.Mentions, items: tweet.userMentions))
       }
     }
   }
@@ -61,6 +61,28 @@ class TweetDetailsTableViewController: UITableViewController {
     
     subscript(i: Int) -> TweetItem {
       return tweetItems[i]
+    }
+  }
+  
+  // MARK: - Constants
+  
+  private struct Defaults {
+    struct SectionName {
+      static let Images = "Images"
+      static let Hashtags = "Hashtags"
+      static let URLs = "URLs"
+      static let Mentions = "Mentions"
+    }
+  }
+  
+  private struct StoryBoard {
+    struct CellReuseIdentifier {
+      static let Text = "TweetTextItem"
+      static let URL = "TweetURLItem"
+      static let Image = "TweetImageItem"
+    }
+    struct Segue {
+      static let TweetSearch = "TweetSearch"
     }
   }
   
@@ -109,21 +131,21 @@ class TweetDetailsTableViewController: UITableViewController {
        return (tableView.frame.size.width) / CGFloat(aspectRatio)
     }
   }
-  
+    
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let tweetItem = tweetItemLists[indexPath.section][indexPath.row]
 
     switch(tweetItem) {
       case .Text(let value):
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetTextItem", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.CellReuseIdentifier.Text, forIndexPath: indexPath)
         cell.textLabel?.text = value
         return cell
       case .URL(let value):
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetURLItem", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.CellReuseIdentifier.URL, forIndexPath: indexPath)
         cell.textLabel?.text = value
         return cell
       case .Image(let url, _):
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetImageItem", forIndexPath: indexPath) as! ImageTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.CellReuseIdentifier.Image, forIndexPath: indexPath) as! ImageTableViewCell
         cell.imageURL = url
         return cell
     }
@@ -167,7 +189,7 @@ class TweetDetailsTableViewController: UITableViewController {
   // MARK: - Navigation
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "TweetSearch" {
+    if segue.identifier == StoryBoard.Segue.TweetSearch {
       if let destination = segue.destinationViewController as? TweetSearchViewController {
         if let tableViewCell = sender as? UITableViewCell {
           destination.searchText = tableViewCell.textLabel?.text

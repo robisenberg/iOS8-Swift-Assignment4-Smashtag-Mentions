@@ -36,6 +36,9 @@ struct TweetStringDecorator {
       static let Urls = UIColor.blueColor()
       static let HashTags = UIColor(red: 1.0, green: 0.84, blue: 0, alpha: 1.0)
     }
+    struct Icons {
+      static let Picture = "📷"
+    }
   }
   
   private func decorateUserMentions() {
@@ -58,7 +61,7 @@ struct TweetStringDecorator {
   
   private func addImageIcons() {
     for _ in tweet.media {
-      _attributedString.appendAttributedString(NSAttributedString(string: " 📷"))
+      _attributedString.appendAttributedString(NSAttributedString(string: " \(Defaults.Icons.Picture)"))
     }
   }
   
