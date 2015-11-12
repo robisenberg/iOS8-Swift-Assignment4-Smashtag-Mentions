@@ -168,7 +168,7 @@ class TweetDetailsTableViewController: UITableViewController {
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "TweetSearch" {
-      if let destination = segue.destinationViewController as? TweetTableViewController {
+      if let destination = segue.destinationViewController as? TweetSearchViewController {
         if let tableViewCell = sender as? UITableViewCell {
           destination.searchText = tableViewCell.textLabel?.text
         }

@@ -1,5 +1,5 @@
 //
-//  TweetTableViewController.swift
+//  TweetSearchViewController.swift
 //  Smashtag
 //
 //  Created by Rob Isenberg on 09/11/2015.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetTableViewController: UITableViewController {
+class TweetSearchViewController: UITableViewController {
   
   // MARK: - Public API
   
@@ -166,7 +166,7 @@ class TweetTableViewController: UITableViewController {
 
 // MARK: - UISearchBarDelegate
 
-extension TweetTableViewController: UISearchBarDelegate {
+extension TweetSearchViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(searchBar: UISearchBar) {
     
