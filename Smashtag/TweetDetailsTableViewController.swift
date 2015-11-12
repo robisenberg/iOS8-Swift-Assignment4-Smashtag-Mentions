@@ -151,6 +151,18 @@ class TweetDetailsTableViewController: UITableViewController {
     }
   }
   
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let tweetItem = tweetItemLists[indexPath.section][indexPath.row]
+    
+    switch(tweetItem) {
+      case .URL(let urlString):
+        guard let url = NSURL(string: urlString) else { return }
+        UIApplication.sharedApplication().openURL(url)
+      default:
+        return
+    }
+  }
+  
   /*
   // Override to support conditional editing of the table view.
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
