@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C38DB151BF4EE8200A389A6 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C38DB141BF4EE8200A389A6 /* ImageDownloader.swift */; };
 		8C41E10D1BF1197F00D1A844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C41E10C1BF1197F00D1A844 /* AppDelegate.swift */; };
 		8C41E1121BF1197F00D1A844 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C41E1101BF1197F00D1A844 /* Main.storyboard */; };
 		8C41E1141BF1197F00D1A844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C41E1131BF1197F00D1A844 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8C38DB141BF4EE8200A389A6 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		8C41E1091BF1197F00D1A844 /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C41E10C1BF1197F00D1A844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C41E1111BF1197F00D1A844 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				8CD984221BF36A2100E05D38 /* UIViews */,
 				8CD984211BF36A1600E05D38 /* Controllers */,
 				8CD9841D1BF26BE600E05D38 /* TweetStringDecorator.swift */,
+				8C38DB141BF4EE8200A389A6 /* ImageDownloader.swift */,
 				8C41E10C1BF1197F00D1A844 /* AppDelegate.swift */,
 				8C41E1101BF1197F00D1A844 /* Main.storyboard */,
 				8C41E1131BF1197F00D1A844 /* Assets.xcassets */,
@@ -311,6 +314,7 @@
 				8C41E1531BF1214500D1A844 /* User.swift in Sources */,
 				8C41E10D1BF1197F00D1A844 /* AppDelegate.swift in Sources */,
 				8C41E1501BF1214500D1A844 /* MediaItem.swift in Sources */,
+				8C38DB151BF4EE8200A389A6 /* ImageDownloader.swift in Sources */,
 				8C41E1511BF1214500D1A844 /* Tweet.swift in Sources */,
 				8CD9842A1BF3AFFF00E05D38 /* ImageTableViewCell.swift in Sources */,
 				8CD984191BF23E7800E05D38 /* TweetTableViewCell.swift in Sources */,

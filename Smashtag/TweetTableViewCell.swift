@@ -50,15 +50,21 @@ class TweetTableViewCell: UITableViewCell {
     bodyTextLabel?.text = nil
   }
   
-  // currently blocks main thread!
-  // try using something like NSUrlSessionDataTask
   private func displayProfileImage() {
     if let tweet = self.tweet {
       
       if let profileImageURL = tweet.user.profileImageURL {
         
-        if let imageData = NSData(contentsOfURL: profileImageURL) {
-          profilePictureImageView?.image = UIImage(data: imageData)
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+          
+          if let imageData = NSData(contentsOfURL: profileImageURL) {
+            
+            dispatch_async(dispatch_get_main_queue()) {
+              if self.tweet?.user.profileImageURL == profileImageURL {
+                self.profilePictureImageView?.image = UIImage(data: imageData)
+              }
+            }
+          }
         }
       }
     }

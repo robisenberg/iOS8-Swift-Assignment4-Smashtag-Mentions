@@ -14,7 +14,7 @@ class ImageTableViewCell: UITableViewCell {
   
   var imageURL: NSURL? {
     didSet {
-      updateUI()
+      fetchImage()
     }
   }
   
@@ -22,10 +22,18 @@ class ImageTableViewCell: UITableViewCell {
   
   // MARK: - Private API
   
-  private func updateUI() {
-    if let imageURL = imageURL {
-      // TODO: This is blocking the main thread!
-      mainImageView?.image = UIImage(data: NSData(contentsOfURL: imageURL)!)
+  private func fetchImage() {
+    if let url = imageURL {
+      dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+        
+        let imageData = NSData(contentsOfURL: url)!
+        
+        dispatch_async(dispatch_get_main_queue()) {
+          if self.imageURL == url {
+            self.mainImageView?.image = UIImage(data: imageData)
+          }
+        }
+      }
     }
   }
   
