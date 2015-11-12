@@ -83,6 +83,7 @@ class TweetDetailsTableViewController: UITableViewController {
     }
     struct Segue {
       static let TweetSearch = "TweetSearch"
+      static let ImageView = "ImageView"
     }
   }
   
@@ -201,11 +202,21 @@ class TweetDetailsTableViewController: UITableViewController {
   // MARK: - Navigation
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == StoryBoard.Segue.TweetSearch {
+    guard let identifier = segue.identifier else { return }
+    
+    switch identifier {
+    case StoryBoard.Segue.TweetSearch:
       guard let destination = segue.destinationViewController as? TweetSearchViewController else { return }
       guard let tableViewCell = sender as? UITableViewCell else { return }
 
       destination.searchText = tableViewCell.textLabel?.text
+    case StoryBoard.Segue.ImageView:
+      guard let destination = segue.destinationViewController as? ImageViewController else { return }
+      guard let tableViewCell = sender as? ImageTableViewCell else { return }
+      
+      destination.image = tableViewCell.mainImageView?.image
+    default:
+      return
     }
   }
   
